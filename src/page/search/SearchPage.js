@@ -8,10 +8,10 @@ function SearchPage() {
     return (
         <>
             <Navbar />
-            <div className='searchPage'>
+            <main className='searchPage'>
                 <Sidebar />
                 <SearchContent />
-            </div>
+            </main>
         </>
     )
 }
