@@ -1,0 +1,15 @@
+.videoCard {
+    margin-bottom: 40px;
+    width: 270px;
+}
+
+.videoCard__thumbnail {
+    height: 140px;
+    width: 250px;
+    object-fit: fill;
+}
+
+.videoCard__avatar {
+    height: 30px !important;
+    width: 30px !important;
+}
