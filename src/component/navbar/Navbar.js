@@ -30,10 +30,14 @@ function Navbar() {
             </div>
 
             <div className='navbar__icons'>
-                <VideoCallSharpIcon className='navbar__icon' />
+                <Link to='/createvideo'>
+                    <VideoCallSharpIcon className='navbar__icon' />
+                </Link>
                 <AppsSharpIcon className='navbar__icon' />
                 <NotificationsSharpIcon className='navbar__icon' />
-                <Avatar alt="Brian Ng" src={brianng} />
+                <Link to='/auth/login'>
+                    <Avatar alt="Brian Ng" src={brianng} />
+                </Link>
             </div>
 
         </div>

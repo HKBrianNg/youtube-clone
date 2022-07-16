@@ -4,9 +4,9 @@ import VideoCard from '../videocard/VideoCard';
 
 function HomeContent() {
     return (
-        <div className='recommendedVideos'>
+        <div className='homeContent'>
             <h2>Recommended</h2>
-            <div className="recommendedVideos__videos">
+            <div className="homeContent__videos">
                 <VideoCard
                     title='Become a Web Developer in 10 minutes | 2019/2020'
                     views='2.3M Views'
