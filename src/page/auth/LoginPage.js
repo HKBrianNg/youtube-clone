@@ -13,7 +13,8 @@ import Typography from '@mui/material/Typography';
 import SendIcon from '@mui/icons-material/Send';
 import CancelIcon from '@mui/icons-material/Cancel';
 import FormHelperText from '@mui/material/FormHelperText';
-
+import Container from '@mui/material/Container';
+import Stack from '@mui/material/Stack';
 
 // React & other utilities library
 import React, { useState } from 'react';
@@ -35,6 +36,7 @@ function LoginPage() {
         email: '',
         password: '',
         showPassword: false,
+        error: false,
         emailError: false,
         passwordError: false,
     });
@@ -59,6 +61,7 @@ function LoginPage() {
         console.log("login:", values);
         // response result from backend
         setValues({
+            error: true,
             emailError: false,
             passwordError: true,
         });
@@ -69,6 +72,7 @@ function LoginPage() {
             email: '',
             password: '',
             showPassword: false,
+            error: false,
             emailError: false,
             passwordError: false,
         });
@@ -88,61 +92,68 @@ function LoginPage() {
             <Navbar />
             <div className='loginPage'>
                 <Sidebar />
-                <div className='loginPage__Content'>
-                    <Box component="form" noValidate autoComplete="off"
-                        sx={{
-                            width: 300,
-                            height: 300,
-                            padding: 3,
-                            backgroundColor: grey[200],
-                            '&:hover': {
-                                backgroundColor: grey[300],
-                                opacity: [0.9, 0.8, 0.7],
-                            },
-                        }}
-                    >
-                        <Typography variant="h4" align="center" >Login</Typography>
-                        <FormControl sx={{ m: 1, width: '30ch' }} variant="standard" required error={values.emailError}>
-                            <InputLabel htmlFor="email">Email</InputLabel>
-                            <Input
-                                id="email"
-                                type='email'
-                                value={values.email}
-                                onChange={handleChange('email')}
-                                aria-describedby="email-msg"
-                            />
-                            {values.emailError &&
-                                (<FormHelperText id="email-msg" error={values.emailError} disabled={false}>Please input a valid email address.</FormHelperText>)
-                            }
-                        </FormControl>
-                        <FormControl sx={{ m: 1, width: '25ch' }} variant="standard" required error={values.passwordError}>
-                            <InputLabel htmlFor="password">Password</InputLabel>
-                            <Input
-                                id="password"
-                                type={values.showPassword ? 'text' : 'password'}
-                                value={values.password}
-                                onChange={handleChange('password')}
-                                aria-describedby="password-msg"
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                        >
-                                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
-                                    </InputAdornment>
+                <Container maxWidth="xlg" sx={{ backgroundColor: grey[100] }}>
+                    <Stack direction="row" spacing={2}>
+                        <Box component="form" noValidate autoComplete="off"
+                            sx={{
+                                width: 300,
+                                height: 300,
+                                padding: 3,
+                                margin: 3,
+                                backgroundColor: grey[200],
+                                '&:hover': {
+                                    backgroundColor: grey[300],
+                                    opacity: [0.9, 0.8, 0.7],
+                                },
+                            }}
+                        >
+                            <Typography variant="h4" align="center" >Login</Typography>
+                            <FormControl sx={{ m: 1, width: '30ch' }} variant="standard" required focused={values.error} error={values.emailError}>
+                                <InputLabel htmlFor="email">Email</InputLabel>
+                                <Input
+                                    id="email"
+                                    type='email'
+                                    value={values.email}
+                                    onChange={handleChange('email')}
+                                    aria-describedby="email-msg"
+                                />
+                                {values.emailError &&
+                                    (<FormHelperText id="email-msg" error={values.emailError} disabled={false}>
+                                        Please input a valid email address.
+                                    </FormHelperText>)
                                 }
-                            />
-                            {values.passwordError &&
-                                (<FormHelperText id="password-msg" error={values.passwordError} disabled={false}>Please input a correct password.</FormHelperText>)
-                            }
-                        </FormControl>
-                        <Button sx={{ m: 2 }} variant="contained" onClick={handleFormSubmit} endIcon={<SendIcon />}>Send</Button>
-                        <Button variant="contained" onClick={handleFormClear} endIcon={<CancelIcon />}>Cancel</Button>
-                    </Box>
-                </div>
+                            </FormControl>
+                            <FormControl sx={{ m: 1, width: '25ch' }} variant="standard" required focused={values.error} error={values.passwordError}>
+                                <InputLabel htmlFor="password">Password</InputLabel>
+                                <Input
+                                    id="password"
+                                    type={values.showPassword ? 'text' : 'password'}
+                                    value={values.password}
+                                    onChange={handleChange('password')}
+                                    aria-describedby="password-msg"
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                            >
+                                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                />
+                                {values.passwordError &&
+                                    (<FormHelperText id="password-msg" error={values.passwordError} disabled={false}>
+                                        Please input a correct password.
+                                    </FormHelperText>)
+                                }
+                            </FormControl>
+                            <Button sx={{ m: 2 }} variant="contained" onClick={handleFormSubmit} endIcon={<SendIcon />}>Send</Button>
+                            <Button variant="contained" onClick={handleFormClear} endIcon={<CancelIcon />}>Cancel</Button>
+                        </Box>
+                    </Stack>
+                </Container>
             </div>
         </>
     )
